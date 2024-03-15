@@ -7,11 +7,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 /*
-Since entity schemes are not specified, they match those of their respective DTOs
-(in this case, ProductRequestDto)
-
-Also, no data store-specific annotations, such as @Entity, are included as
-no data store is specified as well
+See the comment on Document
  */
 @NoArgsConstructor
 @Getter

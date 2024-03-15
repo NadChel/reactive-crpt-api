@@ -3,6 +3,7 @@ package com.example.reactivecrptapi.service.bucketResolver;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -29,7 +30,7 @@ public class SimpleBucketResolver implements BucketResolver {
     }
 
     @Override
-    public Mono<Bucket> resolveBucket(ServerWebExchange exchange) {
+    public Mono<Bucket> resolveBucket(@Nullable ServerWebExchange exchange) {
         return Mono.just(sharedBucket);
     }
 }

@@ -14,6 +14,10 @@ Since entity schemes are not specified, they match those of their respective DTO
 
 Also, no data store-specific annotations, such as @Entity, are included as
 no data store is specified as well
+
+Overriding equals()/hashCode() requires more information on the semantics of this
+domain model (e.g. which of the attributes could be used as a natural key)
+so no overriding of those methods was made
  */
 @NoArgsConstructor
 @Setter
@@ -32,5 +36,4 @@ public class Document {
     private List<Product> products;
     private LocalDate regDate;
     private String regNumber;
-
 }

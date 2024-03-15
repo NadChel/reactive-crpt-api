@@ -36,10 +36,10 @@ public class RateLimitingWebFilter implements WebFilter {
     private Mono<Void> write429Response(ServerWebExchange exchange, ConsumptionProbe probe) {
         ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
-        return writeResponseBody(response, probe);
+        return writeErrorResponseBody(response, probe);
     }
 
-    private Mono<Void> writeResponseBody(ServerHttpResponse response, ConsumptionProbe probe) {
+    private Mono<Void> writeErrorResponseBody(ServerHttpResponse response, ConsumptionProbe probe) {
         Duration timeToRefill = Duration.ofNanos(probe.getNanosToWaitForRefill());
         String humanReadableTimeToRefill = makeReadable(timeToRefill);
         String message = MessageFormat.format(
