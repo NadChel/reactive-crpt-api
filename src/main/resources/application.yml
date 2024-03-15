@@ -1,0 +1,4 @@
+crpt:
+  rate-limiter:
+    capacity: 1
+    duration: 30m
