@@ -11,6 +11,7 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
@@ -43,7 +44,7 @@ public class RateLimitingWebFilter implements WebFilter {
         Duration timeToRefill = Duration.ofNanos(probe.getNanosToWaitForRefill());
         String humanReadableTimeToRefill = makeReadable(timeToRefill);
         String message = MessageFormat.format(
-                "Too many requests. Please wait {0} and make another attempt",
+                "Too many requests. Please wait for at least {0} and make another attempt",
                 humanReadableTimeToRefill
         );
         DataBuffer bodyDataBuffer = DefaultDataBufferFactory.sharedInstance
@@ -52,9 +53,7 @@ public class RateLimitingWebFilter implements WebFilter {
     }
 
     private String makeReadable(Duration duration) {
-        return duration.toString()
-                .substring(2)
-                .replaceAll("(\\d[HMS])(?!$)", "$1 ")
-                .toLowerCase();
+        return DurationFormatUtils.formatDurationWords(
+                duration.toMillis(), true, true);
     }
 }
