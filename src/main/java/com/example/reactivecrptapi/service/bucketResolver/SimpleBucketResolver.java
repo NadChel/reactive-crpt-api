@@ -29,6 +29,12 @@ public class SimpleBucketResolver implements BucketResolver {
                 .build();
     }
 
+    /**
+     * Returns a shared {@code Bucket} of tokens configured according to
+     * application properties
+     *
+     * @param exchange a nullable exchange that will be ignored
+     */
     @Override
     public Mono<Bucket> resolveBucket(@Nullable ServerWebExchange exchange) {
         return Mono.just(sharedBucket);
